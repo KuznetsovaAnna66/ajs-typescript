@@ -1,24 +1,19 @@
 module.exports = {
   env: {
-    browser: true, // браузерное окружение
-    node: true, // окружение node.js
-    es2023: true, // стандарт ECMAScript 2023 (ES14)
-    jest: true, // для корректной работы ESLint с Jest
+    browser: true,
+    es2021: true,
+    node: true,
   },
-  extends: [
-    "airbnb-base",
-    "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript/base",
-  ],
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: "./tsconfig.json",
-  },
   plugins: ["@typescript-eslint"],
-  root: true,
-  rules: {
-    "no-console": "off", // для отладки
-    // добавление нижнего подчеркивания перед приватными свойствами класса:
-    // 'no-underscore-dangle': ['error', { allowAfterThis: true }],
-  },
+  extends: "eslint:recommended",
+  overrides: [
+    {
+      files: ["**/*/*.test.ts"],
+      plugins: ["jest"],
+      extends: ["plugin:jest/recommended"],
+      rules: { "jest/prefer-expect-assertions": "off" },
+    },
+  ],
+  rules: {},
 };
